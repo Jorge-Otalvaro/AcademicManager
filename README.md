@@ -1,5 +1,3 @@
-Claro, aquí tienes un ejemplo de cómo podría ser el archivo README.md con instrucciones de instalación y uso para el proyecto "AcademicManager" en Laravel:
-
 ````markdown
 # AcademicManager
 
@@ -10,7 +8,7 @@ AcademicManager es una API RESTful desarrollada en Laravel que permite importar 
 1. Clona este repositorio en tu máquina local:
 
 ```bash
-git clone <URL_DEL_REPOSITORIO>
+git clone <https://github.com/Jorge-Otalvaro/AcademicManager>
 ```
 ````
 
