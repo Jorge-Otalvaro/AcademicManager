@@ -1,4 +1,3 @@
-````markdown
 # AcademicManager
 
 AcademicManager es una API RESTful desarrollada en Laravel que permite importar y exportar datos relacionados con estudiantes y sus calificaciones desde y hacia archivos CSV.
@@ -8,41 +7,69 @@ AcademicManager es una API RESTful desarrollada en Laravel que permite importar 
 1. Clona este repositorio en tu máquina local:
 
 ```bash
-git clone <https://github.com/Jorge-Otalvaro/AcademicManager>
+git clone https://github.com/Jorge-Otalvaro/AcademicManager
 ```
-````
 
-2. Instala las dependencias de PHP utilizando Composer:
+2. Accede al directorio del proyecto:
+
+```bash
+cd AcademicManager
+```
+
+3. Instala las dependencias del proyecto con Composer:
 
 ```bash
 composer install
 ```
 
-3. Copia el archivo de configuración `.env.example` a `.env` y configura las variables de entorno, incluyendo la conexión a la base de datos:
+4. Copia el archivo de configuración `.env.example` a `.env`:
 
 ```bash
 cp .env.example .env
 ```
 
-4. Genera la clave de aplicación de Laravel:
+5. Genera una nueva clave de aplicación:
 
 ```bash
 php artisan key:generate
 ```
 
-5. Ejecuta las migraciones para crear las tablas necesarias en la base de datos:
+6. Configura tu base de datos en el archivo `.env`:
+
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nombre_base_de_datos
+DB_USERNAME=usuario_base_de_datos
+DB_PASSWORD=contraseña_base_de_datos
+```
+
+7. Ejecuta las migraciones para crear las tablas en la base de datos:
 
 ```bash
 php artisan migrate
 ```
 
-6. Inicia el servidor de desarrollo de Laravel:
-
-```bash
-php artisan serve
-```
+8. El proyecto está listo para ser utilizado.
 
 ## Uso
+
+### Importación de Estudiantes desde CSV
+
+1. Envía una solicitud POST a `/students/import-csv` con un archivo CSV que contenga los datos de los estudiantes.
+2. El formato del archivo CSV debe seguir la siguiente estructura:
+
+```
+Identification,Name,Age,Grade,Subject,GradeValue
+12345601,Student 1,18,A,Math,4.5
+12345601,Student 1,18,A,Science,4.0
+12345601,Student 1,18,A,English,3.5
+```
+
+3. Los estudiantes serán importados a la base de datos y se evitarán duplicados.
+
+## Apis
 
 Una vez que el servidor esté en funcionamiento, puedes usar los siguientes endpoints de la API:
 
@@ -61,11 +88,19 @@ curl -X POST -F "file=@students.csv" http://localhost:8000/students/import-csv
 
 Este comando enviará un archivo CSV llamado `students.csv` al endpoint de importación de la API.
 
-## Contribución
+### Exportación de Estudiantes a CSV
 
-Si deseas contribuir a este proyecto, siéntete libre de enviar pull requests o abrir issues en el repositorio de GitHub.
+1. Envía una solicitud GET a `/students/export-csv` para exportar todos los estudiantes a un archivo CSV.
+2. Se descargará un archivo CSV con los datos de los estudiantes en el formato mencionado anteriormente.
 
-## Licencia
+## Pruebas Unitarias
 
-Este proyecto está bajo la licencia [MIT](https://opensource.org/licenses/MIT).
+Se incluyen pruebas unitarias para garantizar el correcto funcionamiento de la API. Para ejecutar las pruebas, utiliza el siguiente comando:
 
+```bash
+php artisan test
+```
+
+---
+
+Puedes personalizar este README según las necesidades específicas de tu proyecto, incluyendo más detalles sobre la API y su funcionamiento si lo consideras necesario.
