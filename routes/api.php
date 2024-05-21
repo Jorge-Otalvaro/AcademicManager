@@ -8,5 +8,5 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/students/export-csv',[StudentController::class, 'exportCSV']);
-Route::post('/students/import-csv',[StudentController::class, 'importCSV']);
+Route::get('/students/export-csv', [StudentController::class, 'exportCSV']);
+Route::post('/students/import-csv', [StudentController::class, 'importCSV']);
