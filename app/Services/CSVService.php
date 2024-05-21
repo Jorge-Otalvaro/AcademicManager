@@ -31,19 +31,33 @@ class CSVService
         DB::beginTransaction();
 
         try {
+            $rowNumber = 1;
             // Iterar sobre las filas del archivo CSV
             while (($row = fgetcsv($file)) !== false) {
-                
+                $rowNumber++;
                 $row = array_map('trim', $row);
 
                 // Validar los datos de la fila                
                 $validator = Validator::make($row, [
-                    'Identification' => 'required|string|unique:students,identification',
-                    'Name' => 'required|string',
-                    'Age' => 'required|integer',
-                    'Grade' => 'required|string',
-                    'Subject' => 'required|string',
-                    'GradeValue' => 'required|numeric'
+                    0 => 'required|string',
+                    1 => 'required|string',
+                    2 => 'required|integer',
+                    3 => 'required|string',
+                    4 => 'required|string',
+                    5 => 'required|numeric'
+                ], [
+                    '0.required' => 'El campo Identificación es requerido en la fila ' . $rowNumber . '.',
+                    '0.string' => 'El campo Identificación debe ser una cadena de texto en la fila ' . $rowNumber . '.',
+                    '1.required' => 'El campo Nombre es requerido en la fila ' . $rowNumber . '.',
+                    '1.string' => 'El campo Nombre debe ser una cadena de texto en la fila ' . $rowNumber . '.',
+                    '2.required' => 'El campo Edad es requerido en la fila ' . $rowNumber . '.',
+                    '2.integer' => 'El campo Edad debe ser un número entero en la fila ' . $rowNumber . '.',
+                    '3.required' => 'El campo Grado es requerido en la fila ' . $rowNumber . '.',
+                    '3.string' => 'El campo Grado debe ser una cadena de texto en la fila ' . $rowNumber . '.',
+                    '4.required' => 'El campo Asignatura es requerido en la fila ' . $rowNumber . '.',
+                    '4.string' => 'El campo Asignatura debe ser una cadena de texto en la fila ' . $rowNumber . '.',
+                    '5.required' => 'El campo Valor de la Nota es requerido en la fila ' . $rowNumber . '.',
+                    '5.numeric' => 'El campo Valor de la Nota debe ser un valor numérico en la fila ' . $rowNumber . '.'
                 ]);
 
                 // Lanzar una excepción si hay errores de validación
